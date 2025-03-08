@@ -33,9 +33,3 @@ def analyze_comment(comment):
         print(f"Error in analysis: {str(e)}", file=sys.stderr)
         sys.exit(1)
 
-if __name__ == "__main__":
-    # Kiểm tra với comment "hay lắm"
-    comment = "hay lắm"
-    result = analyze_comment(comment)
-    # In kết quả với định dạng đẹp
-    print(json.dumps(result, indent=2, ensure_ascii=False))

@@ -155,7 +155,6 @@ app.get('/evaluate-post', async (req, res) => {
                     score: { $ne: null }
                 }
             },
-            { $sort: { date: -1 } } // Sắp xếp theo date giảm dần (mới nhất trước)
         ]).toArray();
 
         if (analyzedComments.length === 0) {
@@ -193,15 +192,14 @@ app.get('/evaluate-post', async (req, res) => {
 
         let message = '';
         if (negativePercentage >= 50) {
-            message = "Đánh giá chung: Phần lớn bình luận mang tính tiêu cực, cần xem xét cải thiện sản phẩm hoặc dịch vụ.";
+            message = 'Phần lớn bình luận mang tính tiêu cực, cần xem xét cải thiện sản phẩm hoặc dịch vụ.';
         } else if (positivePercentage >= 50) {
-            message = "Đánh giá chung: Đa số bình luận tích cực, sản phẩm/dịch vụ đang được đánh giá tốt.";
+            message = 'Đa số bình luận tích cực, sản phẩm/dịch vụ đang được đánh giá tốt.';
         } else if (neutralPercentage >= 50) {
-            message = "Đánh giá chung: Các bình luận chủ yếu trung tính, chưa có xu hướng rõ rệt.";
+            message = 'Các bình luận chủ yếu trung tính, chưa có xu hướng rõ rệt.';
         } else {
-            message = "Đánh giá chung: Các ý kiến phân bố khá đồng đều, cần phân tích chi tiết hơn.";
+            message = 'Các ý kiến phân bố khá đồng đều, cần phân tích chi tiết hơn.';
         }
-        message += ` Điểm trung bình là ${averageScore * 100}%, cho thấy mức độ tin cậy của các đánh giá.`;
 
         res.json({
             totalComments,
